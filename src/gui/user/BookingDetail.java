@@ -88,6 +88,7 @@ public class BookingDetail extends CustomUI {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new BookingList(userId);
+				frame.dispose();
 			}
 		});
 		// 여기까지 실제 이벤트가 있는 것에 대한 코드 작성
@@ -125,22 +126,33 @@ public class BookingDetail extends CustomUI {
 		custom.setPanel();
 		
 		// 여기서부터 실제 화면에 표현할 컴포넌트에 대한 코드 작성
-		lbMovieTitle = custom.setLbTitle("lbMovieTitle", "", 100, 85, 220, 185, "center");
+//		lbMovieTitle = custom.setLbTitle("lbMovieTitle", "", 100, 85, 220, 185, "center");
+		lbMovieTitle = custom.setLb("lbMovieTitle", "", 100, 85, 220, 185, "center", 20, "bold");
 
-		lbTitleReserveDt = custom.setLbText2("lbTitleReserveDt", "상영일시", 35, 265, 100, 20);
-		lbReserveDt = custom.setLbText3("lbReserveDt", "", 195, 265, 180, 20);
+//		lbTitleReserveDt = custom.setLbText2("lbTitleReserveDt", "상영일시", 35, 265, 100, 20);
+		lbTitleReserveDt = custom.setLb("lbTitleReserveDt", "상영일시", 35, 265, 100, 20, "left", 17, "bold");
+//		lbReserveDt = custom.setLbText3("lbReserveDt", "", 195, 265, 180, 20);
+		lbReserveDt = custom.setLb("lbReserveDt", "", 195, 265, 180, 20, "right", 17, "plain");
 
-		lbTitleReserveCnt = custom.setLbText2("lbTitleReserveCnt", "예매인원", 35, 325, 100, 20);
-		lbReserveCnt = custom.setLbText3("lbReserveCnt", "", 195, 325, 180, 20);
+//		lbTitleReserveCnt = custom.setLbText2("lbTitleReserveCnt", "예매인원", 35, 325, 100, 20);
+		lbTitleReserveCnt = custom.setLb("lbTitleReserveCnt", "예매인원", 35, 325, 100, 20, "left", 17, "bold");
+//		lbReserveCnt = custom.setLbText3("lbReserveCnt", "", 195, 325, 180, 20);
+		lbReserveCnt = custom.setLb("lbReserveCnt", "", 195, 325, 180, 20, "right", 17, "plain");
 
-		lbTitleSeat = custom.setLbText2("lbTitleSeat", "좌석번호", 35, 385, 100, 20);
-		lbSeat = custom.setLbText3("lbSeat", "", 195, 385, 180, 20);
+//		lbTitleSeat = custom.setLbText2("lbTitleSeat", "좌석번호", 35, 385, 100, 20);
+		lbTitleSeat = custom.setLb("lbTitleSeat", "좌석번호", 35, 385, 100, 20, "left", 17, "bold");
+//		lbSeat = custom.setLbText3("lbSeat", "", 195, 385, 180, 20);
+		lbSeat = custom.setLb("lbSeat", "", 195, 385, 180, 20, "right", 17, "plain");
 
-		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 445, 100, 20);
-		lbPrice = custom.setLbText3("lbPrice", "", 195, 445, 180, 20);
+//		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 445, 100, 20);
+		lbTitlePrice = custom.setLb("lbTitlePrice", "결제금액", 35, 445, 100, 20, "left", 17, "bold");
+//		lbPrice = custom.setLbText3("lbPrice", "", 195, 445, 180, 20);
+		lbPrice = custom.setLb("lbPrice", "", 195, 445, 180, 20, "right", 17, "plain");
 
-		lbTitleInsDt = custom.setLbText2("lbTitleInsDt", "예매일자", 35, 505, 130, 20);
-		lbInsDt = custom.setLbText3("lbInsDt", "", 195, 505, 180, 20);
+//		lbTitleInsDt = custom.setLbText2("lbTitleInsDt", "예매일자", 35, 505, 130, 20);
+		lbTitleInsDt = custom.setLb("lbTitleInsDt", "예매일자", 35, 505, 130, 20, "left", 17, "bold");
+//		lbInsDt = custom.setLbText3("lbInsDt", "", 195, 505, 180, 20);
+		lbInsDt = custom.setLb("lbInsDt", "", 195, 505, 180, 20, "right", 17, "plain");
 
 		btnCancel = custom.setBtnBlue("btnCancel", "예매취소", 600);
 		btnBack = custom.setBtnWhite("btnBack", "이전으로", 655);

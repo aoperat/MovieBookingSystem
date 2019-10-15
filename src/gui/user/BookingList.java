@@ -1,5 +1,10 @@
 package gui.user;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -9,10 +14,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import dao.DBConnection;
 import models.Movies;
@@ -81,12 +89,24 @@ public class BookingList extends CustomUI {
 			lbBox = new JLabel[mv.size()];
 			lbMovieTitle = new JLabel[mv.size()];
 			lbTime = new JLabel[mv.size()];
+			
+			JPanel panel = new JPanel();
+			panel.setLayout(null);
+			panel.setBackground(Color.WHITE);
+			
 			for (Movies m : mv) {
 				int moveY = 55 * i;
 				i++;
-				lbBox[i-1] = custom.setLbBox("lbBox"+i, m.getAge()+"", 35, 265 + moveY);
-				lbMovieTitle[i-1] = custom.setLbFont("lbMovieTitle"+i, m.getTitle(), 75, 265 + moveY, 300, 20);
-				lbTime[i-1]= custom.setLbTimeFont("lbTime"+i, m.getRunningTime()+"분", 80, 265 + moveY, 300, 20);
+//				lbBox[i-1] = custom.setLbBox("lbBox"+i, m.getAge()+"", 35, 265 + moveY, sp);
+				lbBox[i-1] = custom.setLbBox("lbBox"+i, m.getAge()+"", 35, 20 + moveY, panel);
+//				lbMovieTitle[i-1] = custom.setLbFont("lbMovieTitle"+i, m.getTitle(), 75, 265 + moveY, 300, 20);
+				lbMovieTitle[i-1] = custom.setLb("lbMovieTitle"+i, m.getTitle(), 75, 20 + moveY, 300, 20, "left", 14, "plain", panel);
+//				lbTime[i-1]= custom.setLbTimeFont("lbTime"+i, m.getRunningTime()+"분", 80, 265 + moveY, 300, 20);
+				lbTime[i-1]= custom.setLb("lbTime"+i, m.getRunningTime()+"분", 80, 20 + moveY, 300, 20, "right", 13, "plain", panel);
+				
+				panel.add(lbBox[i-1]);
+				panel.add(lbMovieTitle[i-1]);
+				panel.add(lbTime[i-1]);
 				
 				lbMovieTitle[i - 1].addMouseListener(new MouseListener() {
 					public void mouseReleased(MouseEvent e) {}
@@ -103,12 +123,19 @@ public class BookingList extends CustomUI {
 					}
 				});
 			}
-
+			panel.setPreferredSize(new Dimension(400, 20+ 55*i));
+			
+			JScrollPane sp = new JScrollPane();
+			sp.setViewportView(panel);
+			sp.setBounds(0, 120, 422, 500);
+			backgroundPanel.add(sp);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		lbTitle = custom.setLbTitle("lbTitle", "예매 내역", 100, 85, 220, 185, "center");
+//		lbTitle = custom.setLbTitle("lbTitle", "예매 내역", 100, 85, 220, 185, "center");
+		lbTitle = custom.setLb("lbTitle", "예매 내역", 100, 85, 220, 185, "center", 20, "bold");
 		btnBack = custom.setBtnWhite("btnBack", "이전으로", 650);
 		// 여기까지 실제 화면에 표현할 컴포넌트에 대한 코드 작성
 	}

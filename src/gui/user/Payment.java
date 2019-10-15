@@ -144,25 +144,32 @@ public class Payment extends CustomUI {
 		CustomUI custom = new CustomUI(backgroundPanel);
 		custom.setPanel();
 		// 여기서부터 실제 화면에 표현할 컴포넌트에 대한 코드 작성
-		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 200, 100, 20);
-		lbPrice = custom.setLbText3("lbPrice", "14,000원", 200, 200, 180, 20);
+//		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 200, 100, 20);
+		lbTitlePrice = custom.setLb("lbTitlePrice", "결제금액", 35, 200, 100, 20, "left", 17, "bold");
+//		lbPrice = custom.setLbText3("lbPrice", "14,000원", 200, 200, 180, 20);
+		lbPrice = custom.setLb("lbPrice", "14,000원", 200, 200, 180, 20, "right", 17, "plain");
 
-		lbTitleDiscount = custom.setLbText2("lbTitleDiscount", "할인항목", 35, 270, 100, 20);
+//		lbTitleDiscount = custom.setLbText2("lbTitleDiscount", "할인항목", 35, 270, 100, 20);
+		lbTitleDiscount = custom.setLb("lbTitleDiscount", "할인항목", 35, 270, 100, 20, "left", 17, "bold");
 
 		ComboDao cDao = ComboDao.getInstance();
 		Vector<Combo> comboDiscounts = cDao.setCombo("discount");
 		comboDiscount = custom.setCombo("combo", comboDiscounts, 235, 270, 150, 25);
 
-		lbTitleResult = custom.setLbText2("lbTitleResult", "최종금액", 35, 340, 100, 20);
-		lbResult = custom.setLbText3("lbText3", "7,000원", 200, 340, 180, 20);
+//		lbTitleResult = custom.setLbText2("lbTitleResult", "최종금액", 35, 340, 100, 20);
+		lbTitleResult = custom.setLb("lbTitleResult", "최종금액", 35, 340, 100, 20, "left", 17, "bold");
+//		lbResult = custom.setLbText3("lbText3", "7,000원", 200, 340, 180, 20);
+		lbResult = custom.setLb("lbText3", "7,000원", 200, 340, 180, 20, "right", 17, "plain");
 
-		lbTitleCard = custom.setLbText2("lbTitleCard", "카드번호", 35, 410, 100, 20);
+//		lbTitleCard = custom.setLbText2("lbTitleCard", "카드번호", 35, 410, 100, 20);
+		lbTitleCard = custom.setLb("lbTitleCard", "카드번호", 35, 410, 100, 20, "left", 17, "bold");
 		txtCard1 = custom.setTextField("txtCard1", "****", 170, 408, 50, 25);
 		txtCard2 = custom.setPasswordField("txtCard2", "****", 225, 408, 50, 25);
 		txtCard3 = custom.setPasswordField("txtCard3", "****", 280, 408, 50, 25);
 		txtCard4 = custom.setTextField("txtCard4", "****", 335, 408, 50, 25);
 
-		lbTitlePassword = custom.setLbText2("lbTitlePassword", "비밀번호", 35, 480, 100, 20);
+//		lbTitlePassword = custom.setLbText2("lbTitlePassword", "비밀번호", 35, 480, 100, 20);
+		lbTitlePassword = custom.setLb("lbTitlePassword", "비밀번호", 35, 480, 100, 20, "left", 17, "bold");
 		txtPassword = custom.setPasswordField("txtPassword", "", 265, 478, 120, 25);
 
 		btnPayment = custom.setBtnBlue("btnPayment", "결제하기", 600);

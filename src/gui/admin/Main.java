@@ -33,6 +33,7 @@ import dao.ScreenDao;
 import dao.SeatDao;
 import dao.TheaterDao;
 import dao.UserDao;
+import gui.user.Login;
 import models.Discounts;
 import models.Movies;
 import models.Places;
@@ -50,7 +51,7 @@ public class Main extends JFrame {
 	private JPanel backgroundPanel, bottomPanel;
 	private JScrollPane userPanel, moviePanel, screenPanel, placePanel, theaterPanel, seatPanel, discountPanel, reservePanel, salesPanel;
 	private JTabbedPane tab;
-	private JButton btnIns, btnUpd, btnDel, btnSel, btnAll;
+	private JButton btnIns, btnUpd, btnDel, btnSel, btnAll, btnLogout;
 	private JTextField txtSearch;
 	private ButtonGroup rbGroup;
 	private JRadioButton rbMovie, rbPlace, rbId;
@@ -565,6 +566,13 @@ public class Main extends JFrame {
 			}
 		});
 		
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Login();
+				frame.dispose();
+			}
+		});
+		
 		frame.setSize(776, 539);
 		frame.setResizable(false);
 		frame.setVisible(true);
@@ -622,6 +630,10 @@ public class Main extends JFrame {
 		btnDel = new JButton("삭제");
 		btnDel.setBounds(600, 30, 70, 40);
 		bottomPanel.add(btnDel);
+
+		btnLogout = new JButton("Logout");
+		btnLogout.setBounds(680, 30, 70, 40);
+		bottomPanel.add(btnLogout);
 		
 		changeVisible(0);
 		

@@ -76,7 +76,8 @@ public class SelectDate extends CustomUI{
 		
 		String dayNames[] = {"일", "월", "화", "수", "목", "금", "토"};
 		
-        lbTitle = custom.setLbTitle("lbTitle", year + "년 " + (month+1) + "월", 100, 85, 220, 185, "center");
+//        lbTitle = custom.setLbTitle("lbTitle", year + "년 " + (month+1) + "월", 100, 85, 220, 185, "center");
+        lbTitle = custom.setLb("lbTitle", year + "년 " + (month+1) + "월", 100, 85, 220, 185, "center", 20, "bold");
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.MONTH, month);
@@ -92,7 +93,8 @@ public class SelectDate extends CustomUI{
 		lbDayNames = new JLabel[dayNames.length];
 		int moveX = 0;
 		for (int i = 0; i < dayNames.length; i++) {
-			lbDayNames[i] = custom.setLbTitle("lbDayNames", dayNames[i], 50 + moveX, 210, 35, 30, "center");
+//			lbDayNames[i] = custom.setLbTitle("lbDayNames", dayNames[i], 50 + moveX, 210, 35, 30, "center");
+			lbDayNames[i] = custom.setLb("lbDayNames", dayNames[i], 50 + moveX, 210, 35, 30, "center", 20, "bold");
 			backgroundPanel.add(lbDayNames[i]);
 			moveX += 50;
 		}
@@ -108,7 +110,8 @@ public class SelectDate extends CustomUI{
 				moveX = 0;
 			}
 
-			lbDay = custom.setLbTitle("lbDay"+iterator.getTimeInMillis(), "", 50 + moveX, 260 + moveY, 35, 30, "center");
+//			lbDay = custom.setLbTitle("lbDay"+iterator.getTimeInMillis(), "", 50 + moveX, 260 + moveY, 35, 30, "center");
+			lbDay = custom.setLb("lbDay"+iterator.getTimeInMillis(), "", 50 + moveX, 260 + moveY, 35, 30, "center", 20, "bold");
 			
 			if ((year == iYear) && (month == iMonth)) {
 				int iDay = iterator.get(Calendar.DAY_OF_MONTH);

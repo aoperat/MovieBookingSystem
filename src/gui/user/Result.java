@@ -62,25 +62,38 @@ public class Result extends CustomUI {
 		// 여기서부터 실제 화면에 표현할 컴포넌트에 대한 코드 작성
 
 		lbIcon = custom.setLbImg("lbIcon", 4, 160, 130);
-		lbTitle = custom.setLbTitle("lbTitle", "예매가 완료되었습니다", 100, 150, 220, 185, "center");
+//		lbTitle = custom.setLbTitle("lbTitle", "예매가 완료되었습니다", 100, 150, 220, 185, "center");
+		lbTitle = custom.setLb("lbTitle", "예매가 완료되었습니다", 100, 150, 220, 185, "center", 20, "bold");
 
-		lbTitleMovie = custom.setLbText2("lbTitleMovie", "영화제목", 35, 310, 100, 20);
-		lbMovie = custom.setLbText3("lbMovie", "계절과 계절 사이", 195, 310, 180, 20);
+//		lbTitleMovie = custom.setLbText2("lbTitleMovie", "영화제목", 35, 310, 100, 20);
+		lbTitleMovie = custom.setLb("lbTitleMovie", "영화제목", 35, 310, 100, 20, "left", 17, "bold");
+//		lbMovie = custom.setLbText3("lbMovie", "계절과 계절 사이", 195, 310, 180, 20);
+		lbMovie = custom.setLb("lbMovie", "계절과 계절 사이", 195, 310, 180, 20, "right", 17, "plain");
 
-		lbTitleDate = custom.setLbText2("lbTitleDate", "상영일자", 35, 360, 100, 20);
-		lbDate = custom.setLbText3("lbDate", "19.10.08", 195, 360, 180, 20);
+//		lbTitleDate = custom.setLbText2("lbTitleDate", "상영일자", 35, 360, 100, 20);
+		lbTitleDate = custom.setLb("lbTitleDate", "상영일자", 35, 360, 100, 20, "left", 17, "bold");
+//		lbDate = custom.setLbText3("lbDate", "19.10.08", 195, 360, 180, 20);
+		lbDate = custom.setLb("lbDate", "19.10.08", 195, 360, 180, 20, "right", 17, "plain");
 
-		lbTitleCnt = custom.setLbText2("lbTitleCnt", "예매인원", 35, 410, 100, 20);
-		lbCnt = custom.setLbText3("lbCnt", "2인", 195, 410, 180, 20);
+//		lbTitleCnt = custom.setLbText2("lbTitleCnt", "예매인원", 35, 410, 100, 20);
+		lbTitleCnt = custom.setLb("lbTitleCnt", "예매인원", 35, 410, 100, 20, "left", 17, "bold");
+//		lbCnt = custom.setLbText3("lbCnt", "2인", 195, 410, 180, 20);
+		lbCnt = custom.setLb("lbCnt", "2인", 195, 410, 180, 20, "right", 17, "plain");
 
-		lbTitleSeat = custom.setLbText2("lbTitleSeat", "좌석번호", 35, 460, 100, 20);
-		lbSeat = custom.setLbText3("lbSeat", "A4, E8", 195, 460, 180, 20);
+//		lbTitleSeat = custom.setLbText2("lbTitleSeat", "좌석번호", 35, 460, 100, 20);
+		lbTitleSeat = custom.setLb("lbTitleSeat", "좌석번호", 35, 460, 100, 20, "left", 17, "bold");
+//		lbSeat = custom.setLbText3("lbSeat", "A4, E8", 195, 460, 180, 20);
+		lbSeat = custom.setLb("lbSeat", "A4, E8", 195, 460, 180, 20, "right", 17, "plain");
 
-		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 510, 100, 20);
-		lbPrice = custom.setLbText3("lbPrice", "7,000원", 195, 510, 180, 20);
+//		lbTitlePrice = custom.setLbText2("lbTitlePrice", "결제금액", 35, 510, 100, 20);
+		lbTitlePrice = custom.setLb("lbTitlePrice", "결제금액", 35, 510, 100, 20, "left", 17, "bold");
+//		lbPrice = custom.setLbText3("lbPrice", "7,000원", 195, 510, 180, 20);
+		lbPrice = custom.setLb("lbPrice", "7,000원", 195, 510, 180, 20, "right", 17, "plain");
 
-		lbTitleDt = custom.setLbText2("lbTitleDt", "예매일자", 35, 560, 130, 20);
-		lbDt = custom.setLbText3("lbDt", "19.10.05 12:27", 195, 560, 180, 20);
+//		lbTitleDt = custom.setLbText2("lbTitleDt", "예매일자", 35, 560, 130, 20);
+		lbTitleDt = custom.setLb("lbTitleDt", "예매일자", 35, 560, 130, 20, "left", 17, "bold");
+//		lbDt = custom.setLbText3("lbDt", "19.10.05 12:27", 195, 560, 180, 20);
+		lbDt = custom.setLb("lbDt", "19.10.05 12:27", 195, 560, 180, 20, "right", 17, "plain");
 
 		btnMain = custom.setBtnBlue("btnMain", "메인으로", 655);
 

@@ -57,14 +57,20 @@ public class UserInfo extends CustomUI {
 		// 여기서부터 실제 화면에 표현할 컴포넌트에 대한 코드 작성
 		lbTitle = custom.setLbImg("lbTitle", 2, 165, 150);
 
-		lbTitleId = custom.setLbText2("lbTitleId", "아이디", 35, 300, 100, 20);
-		lbId = custom.setLbText3("lbId", "", 195, 300, 180, 20);
+//		lbTitleId = custom.setLbText2("lbTitleId", "아이디", 35, 300, 100, 20);
+		lbTitleId = custom.setLb("lbTitleId", "아이디", 35, 300, 100, 20, "left", 17, "bold");
+//		lbId = custom.setLbText3("lbId", "", 195, 300, 180, 20);
+		lbId = custom.setLb("lbId", "", 195, 300, 180, 20, "right", 17, "plain");
 
-		lbTitleBirth = custom.setLbText2("lbTitleBirth", "생년월일", 35, 360, 100, 20);
-		lbBirth = custom.setLbText3("lbText3", "", 195, 360, 180, 20);
+//		lbTitleBirth = custom.setLbText2("lbTitleBirth", "생년월일", 35, 360, 100, 20);
+		lbTitleBirth = custom.setLb("lbTitleBirth", "생년월일", 35, 360, 100, 20, "left", 17, "bold");
+//		lbBirth = custom.setLbText3("lbText3", "", 195, 360, 180, 20);
+		lbBirth = custom.setLb("lbText3", "", 195, 360, 180, 20, "right", 17, "plain");
 
-		lbTitleTel = custom.setLbText2("lbTitleTel", "전화번호", 35, 420, 100, 20);
-		lbTel = custom.setLbText3("lbBirth", "", 195, 420, 180, 20);
+//		lbTitleTel = custom.setLbText2("lbTitleTel", "전화번호", 35, 420, 100, 20);
+		lbTitleTel = custom.setLb("lbTitleTel", "전화번호", 35, 420, 100, 20, "left", 17, "bold");
+//		lbTel = custom.setLbText3("lbBirth", "", 195, 420, 180, 20);
+		lbTel = custom.setLb("lbBirth", "", 195, 420, 180, 20, "right", 17, "plain");
 
 		btnMain = custom.setBtnBlue("btnMain", "메인으로", 605);
 		// 여기까지 실제 화면에 표현할 컴포넌트에 대한 코드 작성

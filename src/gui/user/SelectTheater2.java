@@ -199,12 +199,16 @@ public class SelectTheater2 extends CustomUI {
 			for (int i = 0; i < movies.size(); i++) {
 				if (i == 0) {
 					lbBox[i] = custom.setLbBox("lbBox"+i, movies.get(i).getAge() + "", 17, firstY);
-					lbMovie[i] = custom.setLbFont("lbMovie"+i, movies.get(i).getTitle(), 55, firstY, 300, 20);
-					lbRunningTime[i] = custom.setLbRoomFont("lbRunningTime"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2, 300, 20);
+//					lbMovie[i] = custom.setLbFont("lbMovie"+i, movies.get(i).getTitle(), 55, firstY, 300, 20);
+					lbMovie[i] = custom.setLb("lbMovie"+i, movies.get(i).getTitle(), 55, firstY, 300, 20, "left", 14, "plain");
+//					lbRunningTime[i] = custom.setLbRoomFont("lbRunningTime"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2, 300, 20);
+					lbRunningTime[i] = custom.setLb("lbRunningTime"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2, 300, 20, "left", 14, "bold");
 				} else {
 					lbBox[i] = custom.setLbBox("lbBox"+i, movies.get(i).getAge() + "", 17, firstY + moveY);
-					lbMovie[i] = custom.setLbFont("lbMovie"+i, movies.get(i).getTitle(), 55, firstY + 2 + moveY, 300, 20);
-					lbRunningTime[i] = custom.setLbRoomFont("lbThlbRunningTimeeater"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2 + moveY, 300, 20);
+//					lbMovie[i] = custom.setLbFont("lbMovie"+i, movies.get(i).getTitle(), 55, firstY + 2 + moveY, 300, 20);
+					lbMovie[i] = custom.setLb("lbMovie"+i, movies.get(i).getTitle(), 55, firstY + 2 + moveY, 300, 20, "left", 14, "plain");
+//					lbRunningTime[i] = custom.setLbRoomFont("lbThlbRunningTimeeater"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2 + moveY, 300, 20);
+					lbRunningTime[i] = custom.setLb("lbThlbRunningTimeeater"+i, movies.get(i).getRunningTime()+"분", 380, firstY + 2 + moveY, 300, 20, "left", 14, "bold");
 				}
 				
 				String splitTime[] = movies.get(i).getStartTime().split("\\|");
@@ -221,10 +225,13 @@ public class SelectTheater2 extends CustomUI {
 					int seatCnt = seat.getRow() * seat.getCol();
 					
 					int selectedSeatCnt = 0;
-					if(!(splitSeat[j].equals("null"))) {
+					if(splitSeat[j].equals("null")) {
+						selectedSeatCnt = 0;
+					} else if(splitSeat[j].equals("")) {
+						selectedSeatCnt = 0;
+					} else {
 						selectedSeatCnt = splitSeat[j].split("\\,").length;
 					}
-							
 					int remainingSeats = seatCnt - selectedSeatCnt;
 
 

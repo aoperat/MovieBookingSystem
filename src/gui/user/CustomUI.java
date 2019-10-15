@@ -1,9 +1,16 @@
 package gui.user;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Vector;
@@ -21,6 +28,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import models.Combo;
 
@@ -64,7 +72,6 @@ class CustomUI extends JFrame {
 		txt.setForeground(Color.gray.brighter());
 		
 		txt.addFocusListener(new FocusListener() {
-			@Override
 			public void focusLost(FocusEvent e) {
 				JTextField tf = (JTextField)e.getComponent();
 				if(tf.getText().equals("")) {
@@ -77,7 +84,6 @@ class CustomUI extends JFrame {
 					}
 				}
 			}
-			@Override
 			public void focusGained(FocusEvent e) {
 				JTextField tf = (JTextField)e.getComponent();
 				if (tf.getText().equals(placeholder) || tf.getText().equals("Please input here") || tf.getText().equals("")) {
@@ -109,7 +115,6 @@ class CustomUI extends JFrame {
 		txt.setForeground(Color.gray.brighter());
 		
 		txt.addFocusListener(new FocusListener() {
-			@Override
 			public void focusLost(FocusEvent e) {
 				JTextField tf = (JTextField)e.getComponent();
 				if(tf.getText().equals("")) {
@@ -122,7 +127,6 @@ class CustomUI extends JFrame {
 					}
 				}
 			}
-			@Override
 			public void focusGained(FocusEvent e) {
 				JTextField tf = (JTextField)e.getComponent();
 				if (tf.getText().equals(placeholder) || tf.getText().equals("Please input here") || tf.getText().equals("")) {
@@ -138,26 +142,82 @@ class CustomUI extends JFrame {
 		
 		return txt;
 	}
-	
+
 	protected JButton setBtnBlue(String name, String text, int y) {
-		JButton btn = new JButton();
-		
+
+		class RoundedButton extends JButton {
+			public RoundedButton() {
+				super();
+				decorate();
+			}
+
+			protected void decorate() {
+				setBorderPainted(false);
+				setOpaque(false);
+			}
+
+			protected void paintComponent(Graphics g) {
+				int width = getWidth();
+				int height = getHeight();
+				Graphics2D graphics = (Graphics2D) g;
+				graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				if (getModel().isArmed()) {
+					graphics.setColor(getBackground().darker());
+				} else if (getModel().isRollover()) {
+					graphics.setColor(getBackground().brighter());
+				} else {
+					graphics.setColor(getBackground());
+				}
+				graphics.fillRoundRect(0, 0, width, height, 15, 15);
+				FontMetrics fontMetrics = graphics.getFontMetrics();
+				Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
+				int textX = (width - stringBounds.width) / 2;
+				int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
+				graphics.setColor(getForeground());
+				graphics.setFont(getFont());
+				graphics.drawString(getText(), textX, textY);
+				super.paintComponent(g);
+			}
+		}
+
+		RoundedButton btn = new RoundedButton();
+		btn.setBackground(new Color(53, 121, 247));
 		Font btnFont = new Font("맑은 고딕", Font.PLAIN, 20);
 		btn.setFont(btnFont);
 		btn.setBackground(new Color(53, 121, 247));
 		btn.setForeground(Color.WHITE);
-		btn.setBorderPainted(false);
 		btn.setBounds(35, y, 350, 45);
 		btn.setText(text);
 		backgroundPanel.add(btn);
 		btn.setName(name);
-		
+
 		return btn;
 	}
-	
+
 	protected JButton setBtnWhite(String name, String text, int y) {
+
+		class RoundedBorder implements Border {
+			int radius;
+
+			RoundedBorder(int radius) {
+				this.radius = radius;
+			}
+
+			public Insets getBorderInsets(Component c) {
+				return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
+			}
+
+			public boolean isBorderOpaque() {
+				return true;
+			}
+
+			public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+				g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+			}
+		}
+
 		JButton btn = new JButton();
-		
+		btn.setBorder(new RoundedBorder(15));
 		Font btnFont = new Font("맑은 고딕", Font.PLAIN, 20);
 		btn.setFont(btnFont);
 		btn.setBackground(Color.WHITE);
@@ -166,29 +226,18 @@ class CustomUI extends JFrame {
 		btn.setText(text);
 		backgroundPanel.add(btn);
 		btn.setName(name);
-		
+
 		return btn;
 	}
 	
 	protected JButton setBtnMovie(String name, String time, String seatCnt, int x, int y) {
 		JButton btn = new JButton("<html>" + time + "<br/>" + seatCnt + "</html>");
-//		JLabel lbStartTime = new JLabel(time);
-//		JLabel lbSeatCnt = new JLabel("\n\n" + seatCnt);
-		
-//		Font lbTimeFont = new Font("맑은 고딕", Font.PLAIN, 15);
-//		lbStartTime.setFont(lbTimeFont);
-//		lbStartTime.setForeground(Color.BLACK);
-//		Font lbSeatFont = new Font("맑은 고딕", Font.PLAIN, 10);
-//		lbSeatCnt.setFont(lbSeatFont);
-//		lbSeatCnt.setForeground(new Color(114, 114, 114));
 		
 		btn.setBackground(new Color(230, 236, 240));
 		btn.setForeground(new Color(114, 114, 114));
 		btn.setBorderPainted(false);
 		btn.setBounds(x, y, 90, 70);
 
-//		btn.add(lbStartTime);
-//		btn.add(lbSeatCnt);
 		backgroundPanel.add(btn);
 		btn.setName(name);
 		
@@ -210,9 +259,45 @@ class CustomUI extends JFrame {
 		return btn;
 	}
 	
-	protected JLabel SetLb(String name, String text, int x, int y, int width, int height, String alignment, int fontSize) {
+	protected JButton setbtnBar(String name, String text, int y) {
+		JButton btn = new JButton();
+		
+		Font btnFont = new Font("맑은 고딕", Font.BOLD, 14);
+		btn.setFont(btnFont);
+		btn.setBackground(new Color(230, 236, 240));
+		btn.setForeground(new Color(114, 114, 114));
+		btn.setBorderPainted(false);
+		btn.setBounds(45, y, 334, 40);
+		btn.setText(text);
+		backgroundPanel.add(btn);
+		btn.setName(name);
+		
+		return btn;
+	}
+
+	protected JButton setBtnImg(String name, String text, int x, int y) {
+		ImageIcon icon = new ImageIcon("img/icon5.png");
+		JButton btn = new JButton(text, icon);
+
+		Font btnFont = new Font("맑은 고딕", Font.PLAIN, 18);
+		btn.setFont(btnFont);
+		btn.setBackground(new Color(53, 121, 247));
+		btn.setForeground(Color.WHITE);
+		btn.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btn.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		btn.setBorderPainted(false);
+		btn.setBounds(x, y, 170, 150);
+		btn.setText(text);
+		backgroundPanel.add(btn);
+		btn.setName(name);
+
+		return btn;
+	}
+
+	protected JLabel setLb(String name, String text, int x, int y, int width, int height, String alignment, int fontSize, String weight) {
 		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.PLAIN, fontSize);
+		Font lbFont = new Font("맑은 고딕", setWeight(weight), fontSize);
 		lb.setFont(lbFont);
 		lb.setForeground(new Color(114, 114, 114));
 		lb.setHorizontalAlignment(setAlign(alignment));	
@@ -222,20 +307,21 @@ class CustomUI extends JFrame {
 		
 		return lb;
 	}
-/* 작업완료 후 코드 재정리 필요 : 중복되는 label 너무 많음 : 매개변수화하기	
-	protected JLabel SetLbEm(String name, String text, int x, int y, int width, int height, String alignment, int fontSize) {
+	
+	protected JLabel setLb(String name, String text, int x, int y, int width, int height, String alignment, int fontSize, String weight, JPanel panel) {
 		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.BOLD, fontSize);
+		Font lbFont = new Font("맑은 고딕", setWeight(weight), fontSize);
 		lb.setFont(lbFont);
 		lb.setForeground(new Color(114, 114, 114));
 		lb.setHorizontalAlignment(setAlign(alignment));	
 		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
+//		scroll.add(lb);
+//		backgroundPanel.add(scroll);
 		lb.setName(name);
 		
 		return lb;
 	}
-*/
+/*
 	protected JLabel setLbTitle(String name, String text, int x, int y, int width, int height, String alignment) {
 		JLabel lb = new JLabel(text);
 		Font lbFont = new Font("맑은 고딕", Font.BOLD, 20);
@@ -248,7 +334,6 @@ class CustomUI extends JFrame {
 		
 		return lb;
 	}
-	
 	protected JLabel setLbContents(String name, String text, int x, int y, int width, int height, String alignment) {
 		JLabel lb = new JLabel(text);
 		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 15);
@@ -262,6 +347,69 @@ class CustomUI extends JFrame {
 		return lb;
 	}
 	
+
+	protected JLabel setLbText2(String name, String text, int x, int y, int width, int height) {
+		JLabel lb = new JLabel(text);
+		Font lbFont = new Font("맑은 고딕", Font.BOLD, 17);
+		lb.setFont(lbFont);
+		lb.setForeground(new Color(114, 114, 114));
+		lb.setBounds(x, y, width, height);
+		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+	
+	protected JLabel setLbText3(String name, String text, int x, int y, int width, int height) {
+		JLabel lb = new JLabel(text);
+		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 17);
+		lb.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb.setFont(lbFont);
+		lb.setForeground(new Color(0,0,0));
+		lb.setBounds(x, y, width, height);
+		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+
+	protected JLabel setLbFont(String name, String text, int x, int y, int width, int height) {
+		JLabel lb = new JLabel(text);
+		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 14);
+		lb.setFont(lbFont);
+		lb.setForeground(new Color(0, 0, 0));
+		lb.setBounds(x, y, width, height);
+		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+	
+		protected JLabel setLbRoomFont(String name, String text, int x, int y, int width, int height) {
+		JLabel lb = new JLabel(text);
+		Font lbFont = new Font("맑은 고딕", Font.BOLD, 14);
+		lb.setFont(lbFont);
+		lb.setForeground(new Color(53, 121, 247));
+		lb.setBounds(x, y, width, height);
+		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+
+		protected JLabel setLbTimeFont(String name, String text, int x, int y, int width, int height) {
+		JLabel lb = new JLabel(text);
+		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 13);
+		lb.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb.setFont(lbFont);
+		lb.setForeground(new Color(114, 114, 114));
+		lb.setBounds(x, y, width, height);
+		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+
 	protected JLabel setLbEmContents(String name, String text, int x, int y, int width, int height, String alignment) {
 		JLabel lb = new JLabel(text);
 		Font lbFont = new Font("맑은 고딕", Font.ITALIC | Font.BOLD, 15);
@@ -274,7 +422,6 @@ class CustomUI extends JFrame {
 		
 		return lb;
 	}
-
 	protected JLabel setLbEmContents(String name, String text, int x, int y, int width, int height) {
 		JLabel lb = new JLabel(text);
 		Font lbFont = new Font("맑은 고딕", Font.ITALIC | Font.BOLD, 18);
@@ -286,7 +433,8 @@ class CustomUI extends JFrame {
 		
 		return lb;
 	}
-	
+
+*/	
 	protected JLabel setLbBox(String name, String text, int x, int y) {
 		JLabel lb = new JLabel(text);
 		int age = Integer.parseInt(text);
@@ -310,6 +458,35 @@ class CustomUI extends JFrame {
 		lb.setHorizontalAlignment(SwingConstants.CENTER);
 		lb.setBounds(x, y, 27, 27);
 		backgroundPanel.add(lb);
+		lb.setName(name);
+		
+		return lb;
+	}
+	
+	protected JLabel setLbBox(String name, String text, int x, int y, JPanel panel) {
+		JLabel lb = new JLabel(text);
+		int age = Integer.parseInt(text);
+		
+		if(age == 99) {
+			lb.setFont(new Font("맑은 고딕", Font.BOLD, 0));
+			lb.setBackground(new Color(53, 121, 247));
+		} else if(age >= 19) {
+			lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+			lb.setBackground(Color.RED);
+		} else if (age <= 0) {
+			lb.setFont(new Font("맑은 고딕", Font.BOLD, 10));
+			lb.setBackground(Color.BLUE);
+			lb.setText("전체");
+		} else {
+			lb.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+			lb.setBackground(Color.GREEN);
+		}
+		lb.setOpaque(true);
+		lb.setForeground(Color.WHITE);
+		lb.setHorizontalAlignment(SwingConstants.CENTER);
+		lb.setBounds(x, y, 27, 27);
+		
+//		backgroundPanel.add(panel);
 		lb.setName(name);
 		
 		return lb;
@@ -359,22 +536,6 @@ class CustomUI extends JFrame {
 		return cb;
 	}
 	
-	protected JButton setbtnBar(String name, String text, int y) {
-		JButton btn = new JButton();
-		
-		Font btnFont = new Font("맑은 고딕", Font.BOLD, 14);
-		btn.setFont(btnFont);
-		btn.setBackground(new Color(230, 236, 240));
-		btn.setForeground(new Color(114, 114, 114));
-		btn.setBorderPainted(false);
-		btn.setBounds(45, y, 334, 40);
-		btn.setText(text);
-		backgroundPanel.add(btn);
-		btn.setName(name);
-		
-		return btn;
-	}
-	
 	protected JComboBox<Combo> setCombo(String name, Vector<Combo> combos, int x, int y, int width, int height){
 		JComboBox<Combo> combo = new JComboBox<>();
 		
@@ -420,117 +581,118 @@ class CustomUI extends JFrame {
 		}
 	}
 	
-	protected JLabel setLbText2(String name, String text, int x, int y, int width, int height) {
-		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.BOLD, 17);
-		lb.setFont(lbFont);
-		lb.setForeground(new Color(114, 114, 114));
-		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
-		lb.setName(name);
-		
-		return lb;
+	private int setWeight(String weight) {
+		if(weight.toUpperCase().equals("BOLD")) {
+			return 1;
+		}  else if(weight.toUpperCase().equals("ITALIC")) {
+			return 2;
+		} else {
+			return 0;
+		}
 	}
-	
-	protected JLabel setLbText3(String name, String text, int x, int y, int width, int height) {
-		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 17);
-		lb.setHorizontalAlignment(SwingConstants.RIGHT);
-		lb.setFont(lbFont);
-		lb.setForeground(new Color(0,0,0));
-		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
-		lb.setName(name);
-		
-		return lb;
-	}
-
-	protected JLabel setLbFont(String name, String text, int x, int y, int width, int height) {
-		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 14);
-		lb.setFont(lbFont);
-		lb.setForeground(new Color(0, 0, 0));
-		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
-		lb.setName(name);
-		
-		return lb;
-	}
-
-		protected JLabel setLbRoomFont(String name, String text, int x, int y, int width, int height) {
-		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.BOLD, 14);
-		lb.setFont(lbFont);
-		lb.setForeground(new Color(53, 121, 247));
-		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
-		lb.setName(name);
-		
-		return lb;
-	}
-
-		protected JLabel setLbTimeFont(String name, String text, int x, int y, int width, int height) {
-		JLabel lb = new JLabel(text);
-		Font lbFont = new Font("맑은 고딕", Font.PLAIN, 13);
-		lb.setHorizontalAlignment(SwingConstants.RIGHT);
-		lb.setFont(lbFont);
-		lb.setForeground(new Color(114, 114, 114));
-		lb.setBounds(x, y, width, height);
-		backgroundPanel.add(lb);
-		lb.setName(name);
-		
-		return lb;
-	}
-		
-		protected JList<String> setList(String name, String[] text, int x) {
+/*
+	protected JList<String> setList(String name, String[] text, int x) {
 		JList<String> list = new JList<>(text);
-		
+
 		list.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		list.setForeground(new Color(114, 114, 114));
-		
-		JLabel lb = (JLabel)list.getCellRenderer();
+
+		JLabel lb = (JLabel) list.getCellRenderer();
 		lb.setPreferredSize(new Dimension(200, 50));
-		
+
 		JScrollPane sp = new JScrollPane(list);
 		sp.setBounds(x, 120, 210, 630);
-	    backgroundPanel.add(sp);
-		
+		backgroundPanel.add(sp);
+
 		return list;
 	}
-		
-		protected JList<Combo> setList(String name, DefaultListModel listModel, int x) {
-	      JList<Combo> list = new JList<>(listModel);
-	      list.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-	      list.setForeground(new Color(114, 114, 114));
-	      
-	      JLabel lb = (JLabel)list.getCellRenderer();
-	      lb.setPreferredSize(new Dimension(200, 50));
-	      
-	      JScrollPane sp = new JScrollPane(list);
-	      sp.setBounds(x, 120, 420, 630);
-	       backgroundPanel.add(sp);
-	       list.setName(name);
-	      
-	      return list;
-	   }
-		
-		protected JButton setBtnImg(String name, String text, int x, int y) {
-		ImageIcon icon = new ImageIcon("img/icon5.png");
-		JButton btn = new JButton(text, icon);
-		
-		Font btnFont = new Font("맑은 고딕", Font.PLAIN, 18);
-		btn.setFont(btnFont);
-		btn.setBackground(new Color(53, 121, 247));
-		btn.setForeground(Color.WHITE);
-		btn.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btn.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		btn.setBorderPainted(false);
-		btn.setBounds(x, y, 170, 150);
-		btn.setText(text);
-		backgroundPanel.add(btn);
-		btn.setName(name);
-		
-		return btn;
+*/
+	protected JList<Combo> setList(String name, DefaultListModel listModel, int x) {
+		JList<Combo> list = new JList<Combo>(listModel);
+		list.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		list.setForeground(new Color(114, 114, 114));
+
+		JLabel lb = (JLabel) list.getCellRenderer();
+		lb.setPreferredSize(new Dimension(200, 50));
+
+		JScrollPane sp = new JScrollPane(list);
+		sp.setBounds(x, 120, 420, 630);
+		backgroundPanel.add(sp);
+		list.setName(name);
+
+		return list;
 	}
+/*
+	protected JList<Combo> setListRender(String name, DefaultListModel listModel, int x) {
+		JList<Combo> list = new JList<Combo>(listModel);
+
+		ListRenderer renderer = new ListRenderer();
+		list.setCellRenderer(renderer);
+
+		JScrollPane sp = new JScrollPane(list);
+		sp.setPreferredSize(new Dimension(200, 50));
+		sp.setBounds(x, 120, 420, 630);
+		backgroundPanel.add(sp);
+		list.setName(name);
+
+		return list;
+	}
+}
+
+class ListRenderer extends JPanel implements ListCellRenderer {
+	JLabel lbBox, lbTitle, lbSub;
+
+	public ListRenderer() {
+		setOpaque(false);
+        setLayout(null);
+
+        lbBox = CustomUI.setLbBox("lbBox", "12", 35, 265 + moveY);
+		lbMovieTitle = CustomUI.setLb("lbMovieTitle", m.getTitle(), 75, 265 + moveY, 300, 20, "left", 14, "plain");
+		lbTime = CustomUI.setLb("lbTime", m.getRunningTime()+"분", 80, 265 + moveY, 300, 20, "right", 13, "plain");
+		
+        
+		lbBox = new JLabel();
+		lbBox.setOpaque(true);
+		lbBox.setBounds(10, 10, 27, 27);
+		
+		lbTitle = new JLabel();
+		lbTitle.setOpaque(true);
+		lbBox.setBounds(50, 10, 100, 30);
+		
+		lbSub = new JLabel();
+		lbSub.setOpaque(true);
+		lbBox.setBounds(200, 10, 100, 30);
+		
+		add(lbBox);
+		add(lbTitle);
+		add(lbSub);
+	}
+
+	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		
+		if (index == 0) {
+			label.setText(value.toString());
+			label.setBackground(Color.BLUE);
+			label.setForeground(Color.WHITE);
+		} else if (index == 1) {
+			label.setText(value.toString());
+			label.setBackground(Color.GREEN);
+			label.setForeground(Color.WHITE);
+		} else if (index == 2) {
+			label.setText(value.toString());
+			label.setBackground(Color.RED);
+			label.setForeground(Color.WHITE);
+		} else if (index == 3) {
+			label.setText(value.toString());
+			label.setBackground(Color.WHITE);
+			label.setForeground(Color.BLACK);
+		} else if (index == 4) {
+			label.setText(value.toString());
+			label.setBackground(Color.BLACK);
+			label.setForeground(Color.WHITE);
+		}
+
+		return label;
+	}
+*/
 }

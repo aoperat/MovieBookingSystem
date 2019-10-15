@@ -135,7 +135,8 @@ public class Seat extends CustomUI {
 		custom.setPanel();
 
 		// 여기서부터 실제 화면에 표현할 컴포넌트에 대한 코드 작성
-		lbCnt = custom.setLbText2("lbCnt", "예매 인원", 45, 165, 100, 20);
+//		lbCnt = custom.setLbText2("lbCnt", "예매 인원", 45, 165, 100, 20);
+		lbCnt = custom.setLb("lbCnt", "예매 인원", 45, 165, 100, 20, "left", 17, "bold");
 		String cnt[] = { "1", "2", "3", "4" };
 		comboCnt = custom.setCombo("comboCnt", cnt, 330, 165, 50, 25);
 		btnScreen = custom.setbtnBar("screenBar", "SCREEN", 220);

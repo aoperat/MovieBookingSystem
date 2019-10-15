@@ -86,8 +86,10 @@ public class SelectMovie1 extends CustomUI {
 			for (int j = 0; j < movies.size(); j++) {
 				int moveY = 55;
 				lbBox[j] = custom.setLbBox("lbBox"+j, movies.get(j).getAge() + "", 35, 160 + (moveY * j));
-				lbMovieName[j] = custom.setLbFont("lbMovieName"+j, movies.get(j).getTitle(), 75, 162 + (moveY * j), 300, 20);
-				lbTime[j] = custom.setLbTimeFont("lbTime"+j, movies.get(j).getRunningTime() + "분", 80, 162 + (moveY * j), 300, 20);
+//				lbMovieName[j] = custom.setLbFont("lbMovieName"+j, movies.get(j).getTitle(), 75, 162 + (moveY * j), 300, 20);
+				lbMovieName[j] = custom.setLb("lbMovieName"+j, movies.get(j).getTitle(), 75, 162 + (moveY * j), 300, 20, "left", 14, "plain");
+//				lbTime[j] = custom.setLbTimeFont("lbTime"+j, movies.get(j).getRunningTime() + "분", 80, 162 + (moveY * j), 300, 20);
+				lbTime[j] = custom.setLb("lbTime"+j, movies.get(j).getRunningTime() + "분", 80, 162 + (moveY * j), 300, 20, "right", 13, "plain");
 
 				lbMovieName[j].addMouseListener(new MouseListener() {
 					public void mouseReleased(MouseEvent e) {}
